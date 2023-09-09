@@ -1,0 +1,29 @@
+<div class="w-full">
+<div class="w-[340px] border mt-10 m-auto flex justify-center rounded shadow-lg shadow-purple-400 shadow-offset-4 bg-gray-100 md:w-[500px]pb-4">
+<div class="w-full">
+<div class="w-full flex justify-center align-middle"><h2 class="text-2xl font-bold text-blue-800 p-1">Add Patiant</h2></div>
+
+<div class="w-full flex justify-center align-middle mb-2">
+  <%= form_with model: @patient, url: patients_path, local: true do |f| %>
+    <div class="m-1">
+      <%= f.text_field :name, class: "input", placeholder: "Patient Name"%>
+    </div>
+    <div class="m-1">
+      <%= f.select :gender, Patient.genders.keys%>
+    </div>
+    <div class="m-1">
+      <%= f.date_field :date_of_birth, placeholder: "Date of birth" %>
+    </div>
+
+    <div>
+    <%= f.number_field :user_id, value: current_user.id, style: "display: none" %>
+    </div>
+    <div class="actions p-1 border m-auto w-[100px] cursor-pointer hover:bg-blue-800 hover:text-white text-center font-semibold rounded">
+      <%= f.submit "Add Patient", class: "text-center" %>
+    </div>
+<% end %>
+
+</div>
+</div>
+</div>
+</div>

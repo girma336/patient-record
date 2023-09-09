@@ -1,0 +1,44 @@
+<div>
+  <h1 class="text-center font-bold p-10">Patient Record </h1>
+</div>
+<div class="flex flex-col">
+  <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+      <div class="overflow-hidden">
+        <table class="min-w-full text-left text-sm font-light">
+          <thead
+            class="border-b bg-white font-medium dark:border-neutral-500 dark:bg-neutral-600">
+            <tr>
+            <th scope="col" class="px-6 py-4">#</th>
+            <th scope="col" class="px-6 py-4">Name</th>
+            <th scope="col" class="px-6 py-4">Age</th>
+            <th scope="col" class="px-6 py-4">Gender</th>
+            <th scope="col" class="px-6 py-4 span-3"></th>
+            <th scope="col" class="px-6 py-4 span-3"></th>
+            <th scope="col" class="px-6 py-4 span-3"></th>
+        </tr>
+        </thead>
+    
+        <tbody>
+          <% @patients.each_with_index do |patient, index| %>
+            <tr class="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700">
+            <th class="whitespace-nowrap px-6 py-4 font-medium"><%= index+1 %></th>
+            <td class="whitespace-nowrap px-6 py-4"><%= patient.name %></td>
+            <td class="whitespace-nowrap px-6 py-4"><%=  Date.today.year - patient.date_of_birth.year %></td>
+            <td class="whitespace-nowrap px-6 py-4"><%= patient.gender %></td>
+            
+            <td class="whitespace-nowrap px-6 py-4">
+            <%= button_to 'Delete', "patients/#{patient.id}", method: :delete, data: { confirm: 'Are you sure?' }, class: "btn-all" %>
+            </td>
+            <td class="whitespace-nowrap px-6 py-4">
+            <%= link_to "Appointment", "patients/#{patient.id}/appointments/new" %>
+            </td>
+            <td class="whitespace-nowrap px-6 py-4">
+            <%= link_to "updadet", "patients/#{patient.id}", method: :patch %>
+            </td>
+            </tr>
+          <% end %>
+        </tbody>
+    </table>
+  </div>
+</div>

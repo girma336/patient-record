@@ -1,0 +1,28 @@
+<div class="w-full">
+<div class="w-[340px] border mt-10 m-auto flex justify-center rounded shadow-lg shadow-purple-400 shadow-offset-4 bg-gray-100 md:w-[500px]pb-4">
+<div class="w-full">
+<div class="w-full flex justify-center align-middle"><h2 class="text-2xl font-bold text-blue-800 p-1">Log In</h2></div>
+
+<div class="w-full flex justify-center align-middle mb-2 flex-col">
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="field ml-[30px] mr-auto mt-1 mb-1">
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email" %>
+  </div>
+
+  <div class="field ml-[30px] mr-auto mt-1 mb-1">
+    <%= f.password_field :password, autocomplete: "current-password",
+    placeholder: "Password" %>
+  </div>
+
+  <div class="actions p-1 border m-auto w-[80px] cursor-pointer hover:bg-blue-800 hover:text-white text-center font-semibold rounded">
+    <%= f.submit "Log in" %>
+  </div>
+<% end %>
+<div class="text-blue-700 text-center p-2">
+<%= render "devise/shared/links" %>
+</div>
+
+</div>
+</div>
+</div>

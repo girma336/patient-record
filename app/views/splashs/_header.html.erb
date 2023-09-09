@@ -1,0 +1,26 @@
+<div class="w-[250px] bg-gradient-to-tr from-gray-500 via-gray-300 to-black h-[100vh] shadow-2xl shadow-black shadow-offset-4 relative">
+   
+  <% if user_signed_in? %>
+    <div>
+      <div>
+        <p class="text-lg text-blue-500 p-5">
+         Dashboard
+        </p>
+      </div>
+      <div class="mt-[20px] grid">
+       <% if current_user.role == 'receptionist' %>
+         <%= link_to "Add patient", '/patients/new', class: "text-lg text-blue-100 m-2" %>
+         <%= link_to "Patients", '/patients', class: "text-lg text-blue-100 m-2" %>
+        <% end %>
+
+        <% if current_user.role == 'doctor' %>
+         <%= link_to "Patiant appointment", '/appointments', class: "text-lg text-blue-100 m-2" %>
+        <% end %>
+
+        <div class="absolute bottom-9 right-5 border p-2 bg-white text-base hover:bg-slate-500 hover:text-white rounded-lg">
+          <%= button_to "Sign out", destroy_user_session_path, method: :post %> 
+        </div>
+      </div>
+    </div>
+  <%end%>
+</div>

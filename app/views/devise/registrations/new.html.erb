@@ -1,0 +1,44 @@
+<div class="w-full">
+<div class="w-[340px] border mt-10 m-auto flex justify-center rounded shadow-lg shadow-purple-400 shadow-offset-4 bg-gray-100 md:w-[500px]pb-4">
+<div class="w-full">
+<div class="w-full flex justify-center align-middle"><h2 class="text-2xl font-bold text-blue-800 p-1">Sign up</h2></div>
+
+<div class="w-full flex justify-center align-middle mb-2">
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="field rounded m-1">
+    <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "User name"%>
+  </div>
+
+  <div class="field m-1">
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email" %>
+  </div>
+
+  <div class="field m-1">
+    <%= f.password_field :password, autocomplete: "new-password", placeholder: "Password" %>
+  </div>
+
+  <div class="field m-1">
+
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Password confirmation" %>
+  </div>
+
+  <div class="field m-1">
+    <%= f.label :role %><br />
+    <%= f.select :role, User.roles.keys, {}, {prompt: true, selected: t('select_role')}   %>
+  </div>
+</div>
+
+  <div class="actions p-1 border m-auto w-[80px] cursor-pointer hover:bg-blue-800 hover:text-white text-center font-semibold rounded">
+    <%= f.submit "Sign up", class: "text-center " %>
+  </div>
+<% end %>
+
+<div class="text-blue-700 text-center p-2">
+<%= render "devise/shared/links" %>
+</div>
+
+</div>
+</div>
+</div>

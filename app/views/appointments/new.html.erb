@@ -1,0 +1,34 @@
+<div class="w-full">
+<div class="w-[340px] border mt-10 m-auto flex justify-center rounded shadow-lg shadow-purple-400 shadow-offset-4 bg-gray-100 md:w-[500px]pb-4">
+<div class="w-full">
+<div class="w-full flex justify-center align-middle"><h2 class="text-2xl font-bold text-blue-800 p-1">Create Appointment</h2></div>
+
+<div class="w-full flex justify-center align-middle mb-2">
+  <%= form_with model: @appointment, url: patient_appointments_path(@patient) do |f| %>
+    <div class="m-1">
+      <%= f.text_field :status, class: "input", placeholder: "Patient description"%>
+    </div>
+    <div class="m-1">
+      <%= f.date_field :date, placeholder: "Date" %>
+    </div>
+    <%= f.hidden_field :patient_id, value: @patient.id %>
+    <div class="m-1">
+  <% if User.where(role: 'doctor').present? %>
+  <%= f.select :user_id do %>
+    <% User.where(role: 'doctor').each do |user| %>
+      <option value="<%= user.id %>"><%= user.name %></option>
+    <% end %>
+  <% end %>
+<% else %>
+  <p>No doctors available</p>
+<% end %>
+    </div>
+    <div class="actions p-1 border m-auto w-[80px] cursor-pointer hover:bg-blue-800 hover:text-white text-center font-semibold rounded">
+      <%= f.submit "Create", class: "text-center" %>
+    </div>
+<% end %>
+
+</div>
+</div>
+</div>
+</div>

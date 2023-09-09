@@ -1,0 +1,43 @@
+<% if current_user.role === 'doctor' %>
+  <div>
+    <%= line_chart Appointment.group_by_day(:date).count %>
+    <div class="flex flex-col">
+  <div class="overflow-x-auto mt-10 sm:-mx-6 lg:-mx-8">
+    <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+      <div class="overflow-hidden">
+        <table class="min-w-full text-left text-sm font-light">
+          <thead
+            class="border-b bg-white font-medium dark:border-neutral-500 dark:bg-neutral-600">
+            <tr>
+            <th scope="col" class="px-6 py-4">#</th>
+            <th scope="col" class="px-6 py-4">Appointment date</th>
+            <th scope="col" class="px-6 py-4">Status</th>
+            <th scope="col" class="px-6 py-4">Docter name</th>
+        </tr>
+        </thead>
+    
+        <tbody>
+          <% @appointments.each_with_index do |appointment, index| %>
+            <tr class="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700">
+            <th class="whitespace-nowrap px-6 py-4 font-medium"><%= index+1 %></th>
+            <td class="whitespace-nowrap px-6 py-4"><%= appointment.date %></td>
+            <td class="whitespace-nowrap px-6 py-4"><%= appointment.status %></td>
+            <td class="whitespace-nowrap px-6 py-4">
+            <% user = User.find_by(id: appointment.user_id) %>
+            
+            <% if user %>
+                <%= user.name %> 
+            <% else %>
+                <em>User not found</em>
+            <% end %>
+            </td>
+            </tr>
+          <% end %>
+        </tbody>
+    </table>
+  </div>
+</div>
+  </div>
+  <%else%>
+   <div> you must be a doctor and authorized</div>
+<%end%>
